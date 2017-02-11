@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7ff9801-d40b-4752-a999-9a6c7ac0b469" name="Default" comment="Adding Spring security">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/web/WEB-INF/spring-security.xml" />
+    <list default="true" id="d7ff9801-d40b-4752-a999-9a6c7ac0b469" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TutorMe.iml" afterPath="$PROJECT_DIR$/TutorMe.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/WEB-INF/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/web/WEB-INF/dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/web/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/WEB-INF/spring-security.xml" afterPath="$PROJECT_DIR$/src/web/WEB-INF/spring-security.xml" />
     </list>
     <ignored path="TutorMe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -112,11 +109,12 @@
       <file leaf-file-name="spring-security.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/web/WEB-INF/spring-security.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+            <state relative-caret-position="486">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
-                <marker date="1486820132954" expanded="true" signature="1102:1176" ph="select usern... user_authentication" />
-                <marker date="1486820132954" expanded="true" signature="1240:1308" ph="select usern... user_authorization" />
+                <marker date="1486820309392" expanded="true" signature="1102:1176" ph="select usern... user_authentication" />
+                <marker date="1486820309392" expanded="true" signature="1102:1180" ph="select usern... user_authentication" />
+                <marker date="1486820309392" expanded="true" signature="1244:1312" ph="select usern... user_authorization" />
               </folding>
             </state>
           </provider>
@@ -777,7 +775,7 @@
       <option name="presentableId" value="Default" />
       <updated>1486730847850</updated>
       <workItem from="1486730850816" duration="4685000" />
-      <workItem from="1486815609011" duration="4520000" />
+      <workItem from="1486815609011" duration="4707000" />
     </task>
     <task id="LOCAL-00001" summary="Modification">
       <created>1486818333277</created>
@@ -786,11 +784,18 @@
       <option name="project" value="LOCAL" />
       <updated>1486818333277</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding Spring security">
+      <created>1486820139307</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1486820139307</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9205000" />
+    <option name="totallyTimeSpent" value="9392000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
@@ -969,11 +974,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/web/WEB-INF/spring-security.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="59" selection-start-line="21" selection-start-column="59" selection-end-line="21" selection-end-column="59" />
+        <state relative-caret-position="486">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <marker date="1486820132954" expanded="true" signature="1102:1176" ph="select usern... user_authentication" />
-            <marker date="1486820132954" expanded="true" signature="1240:1308" ph="select usern... user_authorization" />
+            <marker date="1486820309392" expanded="true" signature="1102:1176" ph="select usern... user_authentication" />
+            <marker date="1486820309392" expanded="true" signature="1102:1180" ph="select usern... user_authentication" />
+            <marker date="1486820309392" expanded="true" signature="1244:1312" ph="select usern... user_authorization" />
           </folding>
         </state>
       </provider>
