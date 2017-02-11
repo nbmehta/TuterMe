@@ -19,6 +19,8 @@
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/web/WEB-INF/applicationContext.xml</file>
           <file>file://$MODULE_DIR$/src/web/WEB-INF/dispatcher-servlet.xml</file>
+          <file>file://$MODULE_DIR$/src/web/WEB-INF/Spring-Security.xml</file>
+          <file>file://$MODULE_DIR$/src/web/WEB-INF/spring-security.xml</file>
         </fileset>
       </configuration>
     </facet>
