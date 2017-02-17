@@ -11,9 +11,9 @@
 
 
     <http auto-config="true">
-        <intercept-url pattern='/employeeList' access='ROLE_USER,ROLE_ADMIN ' />
-        <intercept-url pattern='/employeeAdd' access='ROLE_USER'/>
-        <intercept-url pattern='/employeeDelete' access='ROLE_ADMIN' />
+        <!--<intercept-url pattern='/' access='ROLE_USER,ROLE_ADMIN' />-->
+        <!--<intercept-url pattern='/employeeAdd' access='ROLE_USER'/>-->
+        <!--<intercept-url pattern='/employeeDelete' access='ROLE_ADMIN' />-->
     </http>
 
     <authentication-manager>
