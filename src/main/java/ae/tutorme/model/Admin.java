@@ -11,6 +11,10 @@ import javax.persistence.Table;
 @Table(name = "ADMIN")
 public class Admin extends User
 {
+    public Admin(String userName, String password, Activation activation, Authorization authorization) {
+        super(userName, password, activation, authorization);
+    }
+
     public Admin(String userName, String password, Activation activation) {
         super(userName, password, activation);
     }

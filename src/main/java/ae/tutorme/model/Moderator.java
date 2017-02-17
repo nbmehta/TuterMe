@@ -11,6 +11,9 @@ import javax.persistence.Table;
 @Table(name = "MODERATOR")
 public class Moderator extends User
 {
+    public Moderator(String userName, String password, Activation activation, Authorization authorization) {
+        super(userName, password, activation, authorization);
+    }
 
     public Moderator(String userName, String password, Activation activation) {
         super(userName, password, activation);

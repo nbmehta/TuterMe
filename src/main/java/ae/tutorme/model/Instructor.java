@@ -11,6 +11,10 @@ import javax.persistence.Table;
 @Table(name = "INSTRUCTOR")
 public class Instructor extends User
 {
+    public Instructor(String userName, String password, Activation activation, Authorization authorization) {
+        super(userName, password, activation, authorization);
+    }
+
     public Instructor(String userName, String password, Activation activation) {
         super(userName, password, activation);
     }
