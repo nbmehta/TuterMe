@@ -21,14 +21,11 @@ public class App01 {
     @Autowired
     private  UserDAO userDAO;
 
-    @RequestMapping(name = "/adduser")
+    @RequestMapping(value = "/adduser")
     public String addUser() {
 
         System.out.println("Hibernate one to one (Annotation)");
-
-
         User user = new Admin();
-
         user.setPassword("123");
         user.setUserName("123");
 
@@ -43,9 +40,6 @@ public class App01 {
         activ.setUuid("uuid");
 
         user.setActivation(activ);
-
-
-
         userDAO.saveUser(user);
 
         System.out.println("Done");
@@ -53,10 +47,8 @@ public class App01 {
         return "testJSP1";
     }
 
-    @RequestMapping(name = "/")
+    @RequestMapping("/")
     public String home() {
-
-
 
         return "testJSP1";
     }

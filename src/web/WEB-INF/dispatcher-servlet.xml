@@ -15,9 +15,13 @@
 
 
     <context:annotation-config />
+
     <mvc:annotation-driven/>
+
     <context:component-scan base-package="ae.tutorme"/>
+
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
+
     <tx:annotation-driven/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
