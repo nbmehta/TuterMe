@@ -6,15 +6,18 @@ import ae.tutorme.model.Admin;
 import ae.tutorme.model.Authorization;
 import ae.tutorme.model.User;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by almehairbi on 2/17/17.
  */
 
 @Controller
+
 public class App01 {
 
 
@@ -46,10 +49,10 @@ public class App01 {
 
         return "testJSP1";
     }
-
-    @RequestMapping("/")
-    public String home() {
-
-        return "testJSP1";
-    }
+//
+//    @RequestMapping(value = "/",method = RequestMethod.GET)
+//    public String home() {
+//
+//        return "index";
+//    }
 }

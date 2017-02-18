@@ -11,9 +11,12 @@
 
 
     <http auto-config="true">
+        <intercept-url pattern="/**" access="permitAll" />
         <!--<intercept-url pattern='/' access='hasAnyRole' />-->
         <!--<intercept-url pattern='/employeeAdd' access='ROLE_USER'/>-->
         <!--<intercept-url pattern='/employeeDelete' access='ROLE_ADMIN' />-->
+        <!-- access denied page -->
+
     </http>
 
     <authentication-manager>
@@ -21,8 +24,8 @@
             <password-encoder hash="md5" /> <!-- encrypting password -->
             <!-- if not working add datasource up there -->
             <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="select username, password, enabled from user_authentication where username = ?"
-                               authorities-by-username-query="select username, authority from user_authorization where username =? " />
+                               users-by-username-query="select username, password, enabled from USER where username = ?"
+                               authorities-by-username-query="select username, role from authorization where username =? " />
         </authentication-provider>
     </authentication-manager>
 

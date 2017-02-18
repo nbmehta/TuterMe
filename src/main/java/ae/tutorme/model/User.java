@@ -22,6 +22,9 @@ public class User
     @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "ENABLED")
+    private boolean enabled;
+
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "USER",fetch = FetchType.LAZY)
     private Activation activation;
 
