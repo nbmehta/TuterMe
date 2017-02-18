@@ -16,11 +16,13 @@ public class Activation
     @Column(name = "ID")
     private int id;
 
+
+
     @Column(name = "UUID")
     private String uuid;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USERNAME")
+    @PrimaryKeyJoinColumn
     private User user;
 
     public Activation(String uuid, User user) {

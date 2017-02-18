@@ -15,9 +15,11 @@ public class Authorization
     @Column(name = "ID")
     private int id;
 
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USERNAME")
+    @PrimaryKeyJoinColumn
     private User user;
+    
 
     @Column(name = "ROLE")
     private String role;

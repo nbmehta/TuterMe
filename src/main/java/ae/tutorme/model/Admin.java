@@ -1,5 +1,6 @@
 package ae.tutorme.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -11,6 +12,10 @@ import javax.persistence.Table;
 @Table(name = "ADMIN")
 public class Admin extends User
 {
+
+    @Column(name = "LEVEL")
+    private int level;
+
     public Admin(String userName, String password, Activation activation, Authorization authorization) {
         super(userName, password, activation, authorization);
     }
@@ -27,4 +32,11 @@ public class Admin extends User
         super();
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }
