@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public class User
+public abstract class User
 {
 
     @Id
@@ -25,10 +25,10 @@ public class User
     @Column(name = "ENABLED")
     private boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "USER",fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Activation activation;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "USER",fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Authorization authorization;
 
     public User(String userName, String password, Activation activation, Authorization authorization) {
@@ -48,6 +48,16 @@ public class User
         this.userId = userId;
         this.userName = userName;
         this.password = password;
+    }
+
+
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public User() {

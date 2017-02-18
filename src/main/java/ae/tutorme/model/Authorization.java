@@ -1,7 +1,6 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
-import javax.validation.groups.ConvertGroup;
 
 /**
  * Created by almehairbi on 2/17/17.
