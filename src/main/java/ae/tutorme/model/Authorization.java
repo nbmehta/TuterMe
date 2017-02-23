@@ -17,9 +17,11 @@ public class Authorization
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @JoinColumns({
+            @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID"),
+            @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME") })
     private User user;
-    
+
 
     @Column(name = "ROLE")
     private String role;
@@ -28,6 +30,8 @@ public class Authorization
         this.user = user;
         this.role = role;
     }
+
+
 
     public Authorization() {
         this(null, "");

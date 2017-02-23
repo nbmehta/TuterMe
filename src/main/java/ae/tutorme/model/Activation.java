@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by almehairbi on 2/17/17.
@@ -18,22 +19,40 @@ public class Activation
 
 
 
-    @Column(name = "UUID")
-    private String uuid;
+    @Column(name = "ACTIVATION_CODE")
+    private String activationCode;
+
+    @Column(name = "EXPIRY_DATE")
+    private Date expiryDate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private User user;
 
-    public Activation(String uuid, User user) {
-        this.uuid = uuid;
+    public Activation(String activationCode, Date expiryDate, User user) {
+        this.activationCode = activationCode;
+        this.expiryDate = expiryDate;
         this.user = user;
     }
 
+    public Activation(String activationCode, User user) {
+        this.activationCode = activationCode;
+        this.user = user;
+    }
 
     public Activation() {
         this("", null);
     }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+
 
     public int getId() {
         return id;
@@ -43,12 +62,12 @@ public class Activation
         this.id = id;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getactivationCode() {
+        return activationCode;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setactivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public User getUser() {

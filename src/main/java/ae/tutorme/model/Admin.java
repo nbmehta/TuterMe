@@ -13,30 +13,19 @@ import javax.persistence.Table;
 public class Admin extends User
 {
 
-    @Column(name = "LEVEL")
-    private int level;
-
-    public Admin(String userName, String password, Activation activation, Authorization authorization) {
-        super(userName, password, activation, authorization);
-    }
-
-    public Admin(String userName, String password, Activation activation) {
-        super(userName, password, activation);
-    }
-
-    public Admin(int userId, String userName, String password) {
-        super(userId, userName, password);
-    }
 
     public Admin() {
-        super();
     }
 
-    public int getLevel() {
-        return level;
+    public Admin(String userName, String password) {
+        super(userName, password);
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public Admin(String userName, String password, boolean enabled, Activation activation) {
+        super(userName, password, enabled, activation);
+    }
+
+    public Admin(String userName, String password, boolean enabled, Activation activation, Authorization authorization) {
+        super(userName, password, enabled, activation, authorization);
     }
 }

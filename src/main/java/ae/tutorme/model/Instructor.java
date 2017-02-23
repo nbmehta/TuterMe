@@ -13,23 +13,23 @@ import java.util.Set;
 public class Instructor extends User
 {
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Course> courses  = new HashSet<Course>(0);
 
-    public Instructor(String userName, String password, Activation activation, Authorization authorization) {
-        super(userName, password, activation, authorization);
-    }
-
-    public Instructor(String userName, String password, Activation activation) {
-        super(userName, password, activation);
-    }
-
-    public Instructor(int userId, String userName, String password) {
-        super(userId, userName, password);
-    }
 
     public Instructor() {
-        super();
+    }
+
+    public Instructor(String userName, String password) {
+        super(userName, password);
+    }
+
+    public Instructor(String userName, String password, boolean enabled, Activation activation) {
+        super(userName, password, enabled, activation);
+    }
+
+    public Instructor(String userName, String password, boolean enabled, Activation activation, Authorization authorization) {
+        super(userName, password, enabled, activation, authorization);
     }
 
     public Set<Course> getCourses() {

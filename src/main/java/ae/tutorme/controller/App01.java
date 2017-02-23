@@ -53,12 +53,21 @@ public class App01 {
         user.setUserName("ahmed");
         user.setPassword("hi");
 
-        userDAO.saveUser(user);
+        Authorization authorization = new Authorization();
+        authorization.setUser(user);
+        authorization.setRole("TEACHER");
+
+        user.setAuthorization(authorization);
+
+
 
         Course c = new Course(user, "teaching");
+        c.setInstructor(user);
+        c.setCategory(Category.IT);
 
         user.getCourses().add(c);
 
+        userDAO.saveUser(user);
         courseDAO.saveCourse(c);
 
 

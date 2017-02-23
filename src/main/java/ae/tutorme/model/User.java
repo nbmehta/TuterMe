@@ -1,6 +1,8 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by almehairbi on 2/17/17.
@@ -8,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User
 {
 
@@ -31,26 +34,33 @@ public abstract class User
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Authorization authorization;
 
-    public User(String userName, String password, Activation activation, Authorization authorization) {
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Message> messages = new HashSet<>(0);
+
+    public User() {
+        this.activation =null;
+        this.authorization = null;
+        this.enabled = false;
+        this.password = "";
+        this.userName = "";
+    }
+
+    public User(String userName, String password) {
+        this();
         this.userName = userName;
         this.password = password;
+    }
+
+    public User(String userName, String password, boolean enabled, Activation activation) {
+        this(userName, password);
+        this.enabled = enabled;
         this.activation = activation;
+    }
+
+    public User(String userName, String password, boolean enabled, Activation activation, Authorization authorization) {
+        this(userName, password, enabled, activation);
         this.authorization = authorization;
     }
-
-    public User(String userName, String password, Activation activation) {
-        this.userName = userName;
-        this.password = password;
-        this.activation = activation;
-    }
-
-    public User(int userId, String userName, String password) {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-    }
-
-
 
     public boolean isEnabled() {
         return enabled;
@@ -58,10 +68,6 @@ public abstract class User
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public User() {
-        this(0, "", "");
     }
 
     public Activation getActivation() {
