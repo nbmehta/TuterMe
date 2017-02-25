@@ -28,6 +28,9 @@ public abstract class User
     @Column(name = "ENABLED")
     private boolean enabled;
 
+    @Column(name = "FULL_NAME")
+    private String name;
+
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Activation activation;
 
@@ -35,6 +38,7 @@ public abstract class User
     private Authorization authorization;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn
     private Set<Message> messages = new HashSet<>(0);
 
     public User() {
@@ -60,6 +64,27 @@ public abstract class User
     public User(String userName, String password, boolean enabled, Activation activation, Authorization authorization) {
         this(userName, password, enabled, activation);
         this.authorization = authorization;
+    }
+
+    public User(String userName, String password, boolean enabled, String name, Activation activation, Authorization authorization) {
+        this(userName, password, enabled, activation, authorization);
+        this.name = name;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isEnabled() {

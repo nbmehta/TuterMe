@@ -48,10 +48,15 @@ public class App01 {
 //
 //        System.out.println("Done");
 
+        Moderator moderator = new Moderator();
+        moderator.setUserName("null");
+
+
         Instructor user = new Instructor();
         user.setEnabled(true);
         user.setUserName("ahmed");
         user.setPassword("hi");
+
 
         Authorization authorization = new Authorization();
         authorization.setUser(user);
@@ -59,16 +64,6 @@ public class App01 {
 
         user.setAuthorization(authorization);
 
-
-
-        Course c = new Course(user, "teaching");
-        c.setInstructor(user);
-        c.setCategory(Category.IT);
-
-        user.getCourses().add(c);
-
-        userDAO.saveUser(user);
-        courseDAO.saveCourse(c);
 
 
 

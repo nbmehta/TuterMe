@@ -8,4 +8,10 @@ import ae.tutorme.model.Course;
 public interface CourseDAO {
 
     void saveCourse(Course course);
+
+    Course getCourseById(int id);
+
+    Course getCourseByTeacherId(int id);
+
+    void updateCourse(Course course);
 }

@@ -1,5 +1,6 @@
 package ae.tutorme.model;
 
+import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -24,6 +25,10 @@ public class Course {
     @PrimaryKeyJoinColumn
     private Instructor instructor;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private Moderator moderator;
+
     @Column(name = "DESCRIPTION")
     private String description;
 
@@ -33,38 +38,72 @@ public class Course {
     @Column(name = "NAME")
     private String name;
 
-    @Formula("select sum(RATING)/count from RATE where RATE_ID = ?")
+    @Column(name = "ENABLED")
+    private boolean enabled;
+
+    @Formula("select sum(RATING)/count from RATE where COURSE_ID = ?")
     private double rating;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn
     private Set<Enrollment> enrollments = new HashSet<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
     private Set<Topic> topics = new HashSet<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
     private Set<Rate> rates = new HashSet<>(0);
 
-    @Enumerated(EnumType.STRING)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
     private Category category;
 
+
     public Course() {
-        this(null, "");
+        this.description = "";
+        this.category = null;
+        this.instructor = null;
+        this.moderator = null;
+        this.name = "";
+        this.price = 0;
+        this.rating = 0;
+        this.enabled = false;
     }
 
     public Course(String name) {
+        this();
         this.name = name;
     }
 
     public Course(Instructor instructor, String name) {
+        this(name);
         this.instructor = instructor;
-        this.name = name;
     }
 
     public Course(Instructor instructor, String name, Category category) {
-        this.instructor = instructor;
-        this.name = name;
+        this(instructor, name);
         this.category = category;
+    }
+
+    public Course(Instructor instructor, Moderator moderator, String description, double price, String name, double rating, Category category) {
+        this(instructor, name, category);
+        this.moderator = moderator;
+        this.description = description;
+        this.price = price;
+        this.rating = rating;
+    }
+
+
+
+    public Moderator getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(Moderator moderator) {
+        this.moderator = moderator;
     }
 
     public Set<Topic> getTopics() {
@@ -145,5 +184,13 @@ public class Course {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

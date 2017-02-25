@@ -14,9 +14,11 @@ public class Student extends User
 {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn
     private Set<Enrollment> enrollments = new HashSet<>(0);
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn
     private Set<Rate> rates = new HashSet<>(0);
 
     public Student() {

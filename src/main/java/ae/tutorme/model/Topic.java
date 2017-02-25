@@ -28,6 +28,7 @@ public class Topic {
     private int topicNumber;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn
     private Set<Lesson> lessons = new HashSet<>(0);
 
     public Topic() {

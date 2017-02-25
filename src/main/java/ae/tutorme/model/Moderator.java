@@ -14,6 +14,7 @@ public class Moderator extends User
 {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn
     private Set<Course> courses = new HashSet<>(0);
 
 

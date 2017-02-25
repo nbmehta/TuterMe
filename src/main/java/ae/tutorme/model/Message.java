@@ -14,8 +14,9 @@ public class Message {
     @Column(name = "MESSAGE_ID")
     private int id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
-    private int senderId;
+    private User user;
 
     @Column(name = "RECEIVER_ID")
     private int reciverId;
@@ -42,6 +43,18 @@ public class Message {
         this();
         this.subject = subject;
         this.body = body;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getReciverId() {
