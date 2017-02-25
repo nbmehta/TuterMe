@@ -41,9 +41,7 @@ public class CourseDAOImp implements CourseDAO {
 
     @Override
     public List<Course> getCourseByTeacherId(int id) {
-        Course course = null;
         Session session = sessionFactory.getCurrentSession();
-
         String querry = "from ae.tutorme.model.Course Course where Course.instructor.userId = '" + id+"'";
         Query query = session.createQuery(querry);
         List<Course> courseList = query.list();

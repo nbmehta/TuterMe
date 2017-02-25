@@ -1,5 +1,6 @@
 package ae.tutorme.controller;
 
+import ae.tutorme.dao.CategoryDAO;
 import ae.tutorme.dao.CourseDAO;
 import ae.tutorme.dao.UserDAO;
 import ae.tutorme.model.*;
@@ -23,48 +24,43 @@ public class App01 {
     @Autowired
     private CourseDAO courseDAO;
 
+    @Autowired
+    private CategoryDAO categoryDAO;
+
     @RequestMapping(value = "/")
     public String addUser() {
 
-//        System.out.println("Hibernate one to one (Annotation)");
-//        User user = new Student();
-//        user.setPassword("123");
-//        user.setUserName("123");
-//        user.setEnabled(true);
-//
-//
-//        Authorization auth = new Authorization();
-//        auth.setRole("ROLE_ADMIN");
-//        auth.setUser(user);
-//
-//        user.setAuthorization(auth);
-//
-//        Activation activ = new Activation();
-//        activ.setUser(user);
-//        activ.setUuid("uuid");
-//
-//        user.setActivation(activ);
-//        userDAO.saveUser(user);
-//
-//        System.out.println("Done");
-
-        Moderator moderator = new Moderator();
-        moderator.setUserName("null");
-
-
+        System.out.println("Hibernate one to one (Annotation)");
         Instructor user = new Instructor();
+        user.setPassword("123");
+        user.setUserName("123");
         user.setEnabled(true);
-        user.setUserName("ahmed");
-        user.setPassword("hi");
 
 
+        Authorization auth = new Authorization();
+        auth.setRole("ROLE_ADMIN");
+        auth.setUser(user);
+
+        user.setAuthorization(auth);
+
+        Activation activ = new Activation();
+        activ.setUser(user);
+        activ.setactivationCode("uuid");
+
+        user.setActivation(activ);
+        userDAO.saveUser(user);
+
+        System.out.println("Done");
+        Category category = new Category("Hala");
+        categoryDAO.saveCategory(category);
+
+        Course c = new Course();
+        c.setInstructor(user);
+        c.setCategory(category);
+
+        courseDAO.saveCourse(c);
 
 
-        Authorization authorization = new Authorization();
-        authorization.setUser(user);
-        authorization.setRole("TEACHER");
-
-        user.setAuthorization(authorization);
 
 
 
