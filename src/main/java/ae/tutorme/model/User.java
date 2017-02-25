@@ -37,8 +37,7 @@ public abstract class User
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Authorization authorization;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
     private Set<Message> messages = new HashSet<>(0);
 
     public User() {

@@ -44,21 +44,18 @@ public class Course {
     @Formula("select sum(RATING)/count from RATE where COURSE_ID = ?")
     private double rating;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "course")
     private Set<Enrollment> enrollments = new HashSet<>(0);
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "course")
     private Set<Topic> topics = new HashSet<>(0);
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "course")
     private Set<Rate> rates = new HashSet<>(0);
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @PrimaryKeyJoinColumn(name = "CATEGORY_ID")
     private Category category;
 
 

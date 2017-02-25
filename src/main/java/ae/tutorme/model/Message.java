@@ -21,8 +21,7 @@ public class Message {
     private User user;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "message")
     private Set<Message> messages = new HashSet<>(0);
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -13,8 +13,7 @@ import java.util.Set;
 public class Moderator extends User
 {
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy = "moderator")
     private Set<Course> courses = new HashSet<>(0);
 
 

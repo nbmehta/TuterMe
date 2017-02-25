@@ -25,8 +25,7 @@ public class Response {
     @PrimaryKeyJoinColumn
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "response")
     private Set<Response> responses = new HashSet<>(0);
 
     @ManyToOne(fetch = FetchType.LAZY)
