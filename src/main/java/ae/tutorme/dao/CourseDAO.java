@@ -2,6 +2,8 @@ package ae.tutorme.dao;
 
 import ae.tutorme.model.Course;
 
+import java.util.List;
+
 /**
  * Created by almehairbi on 2/18/17.
  */
@@ -11,7 +13,7 @@ public interface CourseDAO {
 
     Course getCourseById(int id);
 
-    Course getCourseByTeacherId(int id);
+    List<Course> getCourseByTeacherId(int id);
 
     void updateCourse(Course course);
 }

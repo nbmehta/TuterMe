@@ -58,6 +58,8 @@ public class App01 {
         user.setPassword("hi");
 
 
+
+
         Authorization authorization = new Authorization();
         authorization.setUser(user);
         authorization.setRole("TEACHER");
@@ -69,10 +71,5 @@ public class App01 {
 
         return "testJSP1";
     }
-//
-//    @RequestMapping(value = "/",method = RequestMethod.GET)
-//    public String home() {
-//
-//        return "index";
-//    }
+
 }
