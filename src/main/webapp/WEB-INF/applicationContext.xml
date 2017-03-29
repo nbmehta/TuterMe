@@ -46,5 +46,24 @@
         <property name="maxUploadSize" value="1024000"/>
     </bean>
 
+    <!-- Production implementation of the JavaMailSender interface, supporting
+       both JavaMail MimeMessages and Spring SimpleMailMessages -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="mail.tutorme.ae" />
+        <property name="port" value="587" />
+        <property name="username" value="admin@tutorme.ae" />
+        <property name="password" value="3deemala7sas" />
+
+        <!-- The name of the property, following JavaBean naming conventions -->
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">false</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
 
 </beans>

@@ -1,7 +1,9 @@
 package ae.tutorme.dao.imp;
 
+import ae.tutorme.dao.InstructorDAO;
 import ae.tutorme.dao.UserDAO;
 import ae.tutorme.model.Course;
+import ae.tutorme.model.Instructor;
 import ae.tutorme.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,9 +26,12 @@ public class UserDAOImp implements UserDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private InstructorDAO instructorDAO;
+
     public void saveUser(User user) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         session.save(user);
 
@@ -38,8 +43,9 @@ public class UserDAOImp implements UserDAO{
     @Override
     public User getUserById(int id) {
 
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         User user = (User) session.get(User.class, id);
+
         session.flush();
         return user;
 

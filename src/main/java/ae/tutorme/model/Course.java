@@ -1,6 +1,5 @@
 package ae.tutorme.model;
 
-import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;

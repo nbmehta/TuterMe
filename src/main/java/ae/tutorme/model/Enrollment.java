@@ -38,13 +38,14 @@ public class Enrollment {
     }
 
     public Enrollment(Date enrolledDate) {
+        this();
         this.enrolledDate = enrolledDate;
     }
 
     public Enrollment(Student student, Course course, Date enrolledDate, double amountPaid) {
+        this(enrolledDate);
         this.student = student;
         this.course = course;
-        this.enrolledDate = enrolledDate;
         this.amountPaid = amountPaid;
     }
 

@@ -1,5 +1,7 @@
 package ae.tutorme.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -27,6 +29,7 @@ public class Activation
 
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private User user;
 
     public Activation(String activationCode, Date expiryDate, User user) {

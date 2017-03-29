@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import org.hibernate.annotations.ForeignKey;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,10 +15,9 @@ import java.util.Set;
 @Table(name = "INSTRUCTOR")
 public class Instructor extends User
 {
-
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "instructor")
     @ForeignKey(name="INSTRUCTOR_ID")
-    private Set<Course> courses  = new HashSet<Course>(0);
+    private Set<Course> courses  = new HashSet<>(0);
 
 
     public Instructor() {

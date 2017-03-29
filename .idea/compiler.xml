@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="ticktock" />
+        <module name="tutorme" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ticktock" target="1.7" />
+      <module name="tutorme" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
