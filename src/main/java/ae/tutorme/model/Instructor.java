@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "INSTRUCTOR")
 public class Instructor extends User
 {
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "instructor")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "instructor")
     @ForeignKey(name="INSTRUCTOR_ID")
     private Set<Course> courses  = new HashSet<>(0);
 

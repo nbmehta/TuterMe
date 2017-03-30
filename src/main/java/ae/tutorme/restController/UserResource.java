@@ -61,13 +61,7 @@ public class UserResource {
     @RequestMapping(value = "/username/{userName}",method = RequestMethod.GET , produces = MediaType.APPLICATION_JSON_VALUE )
     public  ResponseEntity<User> getUserBuUserName(@PathVariable("userName") String userName)
     {
-        User user = userDAO.getUserBuUserName(userName);
 
-        if (user == null) {
-            System.out.println("User mwith id " + userName + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
     };
 
     @RequestMapping(value = "/{userId}",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
