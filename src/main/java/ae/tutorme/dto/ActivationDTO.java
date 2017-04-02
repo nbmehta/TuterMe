@@ -16,6 +16,10 @@ public class ActivationDTO implements Serializable
     private String activationCode;
     private Date expiryDate;
     private String userName;
+    
+    public ActivationDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public ActivationDTO(Activation activation) {
         this.id = activation.getId();

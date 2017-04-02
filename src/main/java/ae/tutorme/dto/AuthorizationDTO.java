@@ -16,6 +16,10 @@ public class AuthorizationDTO implements Serializable
     private int id;
     private String role;
     private String userName;
+    
+    public AuthorizationDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public AuthorizationDTO(Authorization authorization) {
         this.id = authorization.getId();

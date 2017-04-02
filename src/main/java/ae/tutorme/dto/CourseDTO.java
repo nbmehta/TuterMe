@@ -30,6 +30,10 @@ public class CourseDTO implements Serializable {
     private Set<TopicDTO> topics;
     private Set<RateDTO> rates ;
     private int categoryId;
+    
+    public CourseDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public CourseDTO(Course course) {
@@ -48,7 +52,7 @@ public class CourseDTO implements Serializable {
     }
 
     public Set<EnrollmentDTO> enroolmentConverter(Set<Enrollment> enrollments) {
-        Set<EnrollmentDTO> enrollmentDTOs = null;
+        Set<EnrollmentDTO> enrollmentDTOs = new HashSet<>();
         for (Enrollment e : enrollments) {
             EnrollmentDTO enrollmentDTO = new EnrollmentDTO(e);
             enrollmentDTOs.add(enrollmentDTO);
@@ -57,7 +61,7 @@ public class CourseDTO implements Serializable {
     }
 
     public Set<TopicDTO> topicConverter(Set<Topic> topics) {
-        Set<TopicDTO> topicDTOs = null;
+        Set<TopicDTO> topicDTOs =  new HashSet<>();
         for (Topic t : topics) {
             TopicDTO topicDTO = new TopicDTO(t);
             topicDTOs.add(topicDTO);
@@ -65,7 +69,7 @@ public class CourseDTO implements Serializable {
         return topicDTOs;
     }
     public Set<RateDTO> rateConverter(Set<Rate> rates) {
-        Set<RateDTO> rateDTOs = null;
+        Set<RateDTO> rateDTOs =  new HashSet<>();
         for (Rate r : rates) {
             RateDTO rateDTO = new RateDTO(r);
             rateDTOs.add(rateDTO);

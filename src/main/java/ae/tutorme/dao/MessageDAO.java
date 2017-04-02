@@ -1,6 +1,7 @@
 package ae.tutorme.dao;
 
 
+import ae.tutorme.dto.MessageDTO;
 import ae.tutorme.model.Message;
 
 import java.util.List;
@@ -17,7 +18,13 @@ public interface MessageDAO {
 
     List<Message> getMessageByReciverId(int id);
 
+    Message getMessagesById(int id);
 
-
-
+    MessageDTO getMessageDTOById(int id);
+    
+    void updateMessage(Message msg);
+    
+    MessageDTO updateMessage(int id, MessageDTO msg);
+    
+    void deleteMessage(int id);
 }

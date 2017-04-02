@@ -43,4 +43,23 @@ public class AuthorizationDAOImp implements AuthorizationDAO {
         }
         return null;
     }
+
+	@Override
+	public Authorization getById(int id) {
+		return (Authorization) sessionFactory.getCurrentSession().get(Authorization.class, id);
+	}
+
+	@Override
+	public void updateAuthorization(Authorization auth) {
+		sessionFactory.getCurrentSession().update(auth);
+	}
+
+	@Override
+	public void deleteAuthorization(int id) {
+		Session session = sessionFactory.getCurrentSession();
+        String querry = "delete from ae.tutorme.model.Authorization auth where auth.id = :id";
+        Query query = session.createQuery(querry);
+        query.setParameter("id", id);
+        query.executeUpdate();
+	}
 }

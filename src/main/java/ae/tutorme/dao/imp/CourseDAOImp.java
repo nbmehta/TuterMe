@@ -1,7 +1,12 @@
 package ae.tutorme.dao.imp;
 
 import ae.tutorme.dao.CourseDAO;
+import ae.tutorme.dto.CourseDTO;
+import ae.tutorme.dto.EnrollmentDTO;
 import ae.tutorme.model.Course;
+import ae.tutorme.model.Enrollment;
+
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,4 +59,36 @@ public class CourseDAOImp implements CourseDAO {
         session.saveOrUpdate(course);
         session.flush();
     }
+
+	@Override
+	public void deleteCourse(int id) {
+		Session session = sessionFactory.getCurrentSession();
+        String querry = "delete from ae.tutorme.model.Course c where c.courseId = :id";
+        Query query = session.createQuery(querry);
+        query.setParameter("id", id);
+        query.executeUpdate();
+	}
+
+	@Override
+	public CourseDTO getCourseDTOById(int id) {
+		Course course = getCourseById(id);
+		return course == null ? null : new CourseDTO(course);
+	}
+
+	@Override
+	public CourseDTO updateCourse(int id, CourseDTO course) {
+		Course courseFull = getCourseById(id);
+		
+		if(courseFull != null) {
+			courseFull.setDescription(course.getDescription());
+			courseFull.setEnabled(course.isEnabled());
+			courseFull.setPrice(course.getPrice());
+			courseFull.setName(course.getName());
+			
+			updateCourse(courseFull);
+			return new CourseDTO(courseFull);
+		} else {
+			return null;
+		}
+	}
 }

@@ -19,7 +19,11 @@ public class TopicDTO implements Serializable {
     private int courseId;
     private String topicName;
     private int topicNumber;
-    private Set<LessonDTO> lessons ;
+    private Set<LessonDTO> lessons;
+    
+    public TopicDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public TopicDTO(Topic topic) {
@@ -31,7 +35,7 @@ public class TopicDTO implements Serializable {
     }
 
     public Set<LessonDTO> converter(Set<Lesson> lessons) {
-        Set<LessonDTO> lessonDTOs = null;
+        Set<LessonDTO> lessonDTOs = new HashSet<>();
         for (Lesson l : lessons) {
             LessonDTO lessonDTO = new LessonDTO(l);
             lessonDTOs.add(lessonDTO);

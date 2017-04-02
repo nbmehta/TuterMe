@@ -11,5 +11,9 @@ public interface AuthorizationDAO {
 
     Authorization getAuthorizationByUserName(String userName);
 
-
+    Authorization getById(int id);
+    
+    void updateAuthorization(Authorization auth);
+    
+    void deleteAuthorization(int id);
 }

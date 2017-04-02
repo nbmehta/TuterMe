@@ -1,11 +1,15 @@
 package ae.tutorme.model;
 
-import org.hibernate.annotations.ForeignKey;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ForeignKey;
 
 /**
  * Created by almehairbi on 2/17/17.

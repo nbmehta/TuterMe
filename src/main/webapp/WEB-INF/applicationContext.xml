@@ -11,7 +11,7 @@
 
         <property name="url" value="jdbc:mysql://localhost:3306/tutorme?characterEncoding=utf8&amp;useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;seLegacyDatetimeCode=false&amp;serverTimezone=GMT" />
         <property name="username" value="root" />
-        <property name="password" value="3deemala7sas" />
+        <property name="password" value="root" />
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

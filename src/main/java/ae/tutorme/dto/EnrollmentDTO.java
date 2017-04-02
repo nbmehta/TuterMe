@@ -19,6 +19,10 @@ public class EnrollmentDTO implements Serializable {
     private int courseId;
     private Date enrolledDate;
     private double amountPaid;
+    
+    public EnrollmentDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public EnrollmentDTO(Enrollment enrollment) {
         this.id = enrollment.getId();

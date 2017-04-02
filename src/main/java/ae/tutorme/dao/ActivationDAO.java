@@ -10,4 +10,8 @@ public interface ActivationDAO {
     void saveActivation(Activation activation);
 
     void updateActivation(Activation activation);
+    
+    void deleteActivation(int id);
+    
+    Activation getById(int id);
 }

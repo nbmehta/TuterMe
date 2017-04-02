@@ -1,7 +1,7 @@
 package ae.tutorme.dao.imp;
 
-import ae.tutorme.dao.MessageDAO;
-import ae.tutorme.model.Message;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
+import ae.tutorme.dao.MessageDAO;
+import ae.tutorme.dto.MessageDTO;
+import ae.tutorme.model.Message;
 
 /**
  * Created by almehairbi on 2/25/17.
@@ -49,5 +50,46 @@ public class MessageDAOImp implements MessageDAO {
         return messages;
     }
 
-    }
+	@Override
+	public Message getMessagesById(int id) {
+		return (Message) sessionFactory.getCurrentSession().get(Message.class, id);
+	}
+
+	@Override
+	public MessageDTO getMessageDTOById(int id) {
+		Message msg = getMessagesById(id);
+		return msg == null ? null : new MessageDTO(msg);
+	}
+
+	@Override
+	public MessageDTO updateMessage(int id, MessageDTO msg) {
+		Message msgFull = getMessagesById(msg.getId());
+		
+		if(msgFull != null) {
+			msgFull.setBody(msg.getBody());
+			msgFull.setReciverId(msg.getReciverId());
+			msgFull.setSubject(msg.getSubject());
+			
+			updateMessage(msgFull);
+			return new MessageDTO(msgFull);
+		} else {
+			return null;
+		}	
+	}
+
+	@Override
+	public void updateMessage(Message msg) {
+		sessionFactory.getCurrentSession().update(msg);
+	}
+
+	@Override
+	public void deleteMessage(int id) {
+		Session session = sessionFactory.getCurrentSession();
+        String querry = "delete from ae.tutorme.model.Message m where m.id = :id";
+        Query query = session.createQuery(querry);
+        query.setParameter("id", id);
+        query.executeUpdate();
+	}
+
+}
 

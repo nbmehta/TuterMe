@@ -23,7 +23,9 @@ public class MessageDTO implements Serializable {
     private String subject;
     private String body;
 
-
+public MessageDTO() {
+	// TODO Auto-generated constructor stub
+}
 
     public MessageDTO(Message message) {
         this.id = message.getId();

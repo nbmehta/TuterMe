@@ -28,7 +28,7 @@ public class Topic implements Serializable {
     @Column(name = "TOPIC_NUMBER")
     private int topicNumber;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "topic")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY,mappedBy = "topic")
     private Set<Lesson> lessons = new HashSet<>(0);
 
     public Topic() {
