@@ -1,7 +1,10 @@
 package ae.tutorme.dao.imp;
 
 import ae.tutorme.dao.AuthorizationDAO;
+import ae.tutorme.dto.AuthorizationDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Authorization;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +23,9 @@ public class AuthorizationDAOImp implements AuthorizationDAO {
 
     @Autowired
     private SessionFactory sessionFactory;
+    
+    @Autowired
+    private Converter converter;
 
 
     @Override
@@ -61,5 +67,12 @@ public class AuthorizationDAOImp implements AuthorizationDAO {
         Query query = session.createQuery(querry);
         query.setParameter("id", id);
         query.executeUpdate();
+	}
+
+	@Override
+	public Authorization saveAuthorization(AuthorizationDTO authorization) {
+		Authorization full = converter.toAuthorization(authorization);
+		saveAuthorization(full);
+		return full;
 	}
 }

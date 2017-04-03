@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public interface MessageDAO {
 
-    void saveMessage(Message message);
+    Message saveMessage(Message message);
 
     List<Message> getMessagesBySenderId(int id);
 

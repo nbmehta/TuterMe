@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.RateDAO;
 import ae.tutorme.dto.RateDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Rate;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/rate")
 public class RateResource {
 	private static final Logger logger = Logger.getLogger(RateResource.class);
@@ -26,11 +28,14 @@ public class RateResource {
 	@Autowired
 	private RateDAO rateDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addRate(@RequestBody Rate rate) {
+	public ResponseEntity<?> addRate(@RequestBody RateDTO rate) {
 		try {
-			rateDAO.saveRate(rate);
-			return new ResponseEntity<RateDTO>(new RateDTO(rate), HttpStatus.OK);
+			Rate r = rateDAO.saveRate(converter.toRate(rate));
+			return new ResponseEntity<>(new RateDTO(r), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("addRate()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

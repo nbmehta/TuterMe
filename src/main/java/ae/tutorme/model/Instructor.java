@@ -38,8 +38,13 @@ public class Instructor extends User
     public Instructor(String userName, String password, boolean enabled, Activation activation, Authorization authorization) {
         super(userName, password, enabled, activation, authorization);
     }
+    
+	public Instructor(int userId, String userName, String password, boolean enabled, String name, Activation activation, Authorization authorization, Set<Message> messages, Set<Course> courses) {
+		super(userId, userName, password, enabled, name, activation, authorization, messages);
+		this.courses = courses;
+	}
 
-    public Set<Course> getCourses() {
+	public Set<Course> getCourses() {
         return courses;
     }
 

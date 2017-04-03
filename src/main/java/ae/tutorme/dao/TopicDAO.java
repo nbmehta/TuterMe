@@ -8,7 +8,7 @@ import ae.tutorme.model.Topic;
  */
 public interface TopicDAO {
 
-    void saveTopic(Topic topic);
+    Topic saveTopic(Topic topic);
 
     void updateTopic(Topic topic);
 

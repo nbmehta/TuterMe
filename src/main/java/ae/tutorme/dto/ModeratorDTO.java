@@ -15,8 +15,12 @@ import java.util.Set;
 public class ModeratorDTO extends UserDTO
 {
 
-    private Set<CourseDTO> courses;
+    private Set<CourseDTO> courses = new HashSet<>();
 
+    
+    public ModeratorDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public ModeratorDTO(User user) {

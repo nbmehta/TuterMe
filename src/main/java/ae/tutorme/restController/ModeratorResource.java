@@ -9,14 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.UserDAO;
 import ae.tutorme.dto.ModeratorDTO;
 import ae.tutorme.dto.ModeratorDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Moderator;
+import ae.tutorme.model.User;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/moderator")
 public class ModeratorResource {
 	private static final Logger LOG = Logger.getLogger(ModeratorResource.class);
@@ -24,13 +27,14 @@ public class ModeratorResource {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public ResponseEntity<?> addModerator(@RequestBody Moderator mod) {
+	public ResponseEntity<?> addModerator(@RequestBody ModeratorDTO mod) {
 		try {
-			mod.getActivation().setUser(mod);
-			mod.getAuthorization().setUser(mod);
-			userDAO.saveUser(mod);
-			return new ResponseEntity<>(new ModeratorDTO(mod), HttpStatus.OK);
+			User u = userDAO.saveUser(converter.toModerator(mod));
+			return new ResponseEntity<>(new ModeratorDTO(u), HttpStatus.OK);
 		} catch (Exception ex) {
 			LOG.error("addModerator()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

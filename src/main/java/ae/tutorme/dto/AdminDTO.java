@@ -10,6 +10,9 @@ import ae.tutorme.model.User;
 public class AdminDTO extends UserDTO
 {
 
+	public AdminDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public AdminDTO(User user) {
         super(user);

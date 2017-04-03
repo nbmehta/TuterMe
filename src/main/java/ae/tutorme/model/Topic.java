@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,10 +29,19 @@ public class Topic implements Serializable {
     @Column(name = "TOPIC_NUMBER")
     private int topicNumber;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY,mappedBy = "topic")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "topic")
     private Set<Lesson> lessons = new HashSet<>(0);
+    
+    public Topic(int id, Course course, String topicName, int topicNumber, Set<Lesson> lessons) {
+		super();
+		this.id = id;
+		this.course = course;
+		this.topicName = topicName;
+		this.topicNumber = topicNumber;
+		this.lessons = lessons;
+	}
 
-    public Topic() {
+	public Topic() {
         this.course = null;
         this.topicName = "";
         this.topicNumber = 0;

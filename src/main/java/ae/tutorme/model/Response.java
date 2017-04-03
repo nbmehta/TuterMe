@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,8 +36,18 @@ public class Response implements Serializable {
 
     @Column(name = "RESPONSE_TEXT")
     private String text;
+    
+    public Response(int id, Course course, User user, Set<Response> responses, Response response, String text) {
+		super();
+		this.id = id;
+		this.course = course;
+		this.user = user;
+		this.responses = responses;
+		this.response = response;
+		this.text = text;
+	}
 
-    public Response() {
+	public Response() {
 
         this.course =null;
         this.response = null;

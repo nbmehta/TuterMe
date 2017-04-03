@@ -8,18 +8,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.CourseDAO;
 import ae.tutorme.dto.CourseDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Course;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/course")
 public class CourseResource {
 	private static final Logger logger = Logger.getLogger(CourseResource.class);
@@ -27,11 +28,14 @@ public class CourseResource {
 	@Autowired
 	private CourseDAO courseDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addCourse(@RequestBody Course course) {
+	public ResponseEntity<?> addCourse(@RequestBody CourseDTO course) {
 		try {
-			courseDAO.saveCourse(course);
-			return new ResponseEntity<CourseDTO>(new CourseDTO(course), HttpStatus.OK);
+			Course c = courseDAO.saveCourse(converter.toCouse(course));
+			return new ResponseEntity<>(new CourseDTO(c), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("addCourse()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

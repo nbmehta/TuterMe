@@ -23,12 +23,12 @@ public class ResponseDAOImp implements ResponseDAO {
 
 
     @Override
-    public void saveResponse(Response response) {
+    public Response saveResponse(Response response) {
 
         Session session = sessionFactory.getCurrentSession();
         session.save(response);
         session.flush();
-
+        return response;
     }
     
     @Override

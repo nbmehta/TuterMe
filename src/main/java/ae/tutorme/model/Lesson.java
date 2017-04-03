@@ -27,8 +27,17 @@ public class Lesson {
 
     @Column(name = "MATERIAL_PATH")
     private String materialPath;
+    
+    public Lesson(int id, Topic topic, String lessonName, int lessonNumber, String materialPath) {
+		super();
+		this.id = id;
+		this.topic = topic;
+		this.lessonName = lessonName;
+		this.lessonNumber = lessonNumber;
+		this.materialPath = materialPath;
+	}
 
-    public Lesson() {
+	public Lesson() {
         this.lessonName = "";
         this.lessonNumber = 0;
         this.materialPath = "";

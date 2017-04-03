@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.ActivationDAO;
 import ae.tutorme.dto.ActivationDTO;
 import ae.tutorme.model.Activation;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/activation")
 public class ActivationResource {
 	
@@ -28,10 +29,10 @@ public class ActivationResource {
 	private ActivationDAO activationDAO;
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addActivation(@RequestBody Activation activation) {
+	public ResponseEntity<?> addActivation(@RequestBody ActivationDTO activation) {
 		try {
-			activationDAO.saveActivation(activation);
-			return new ResponseEntity<ActivationDTO>(new ActivationDTO(activation), HttpStatus.OK);
+			Activation full = activationDAO.saveActivation(activation);
+			return new ResponseEntity<>(new ActivationDTO(full), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("addActivation()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,7 +58,7 @@ public class ActivationResource {
 		try {
 			Activation activationFull = activationDAO.getById(id);
 			
-			activationFull.setactivationCode(activation.getactivationCode());
+			activationFull.setactivationCode(activation.getActivationCode());
 			activationFull.setExpiryDate(activation.getExpiryDate());
 			
 			activationDAO.updateActivation(activationFull);

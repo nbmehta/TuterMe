@@ -4,19 +4,19 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.UserDAO;
 import ae.tutorme.dto.StudentDTO;
-import ae.tutorme.dto.StudentDTO;
-import ae.tutorme.model.Student;
+import ae.tutorme.dto.converter.Converter;
+import ae.tutorme.model.User;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/student")
 public class StudentResource {
 	private static final Logger LOG = Logger.getLogger(StudentResource.class);
@@ -24,13 +24,14 @@ public class StudentResource {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public ResponseEntity<?> addStudent(@RequestBody Student Student) {
+	public ResponseEntity<?> addStudent(@RequestBody StudentDTO Student) {
 		try {
-			Student.getActivation().setUser(Student);
-			Student.getAuthorization().setUser(Student);
-			userDAO.saveUser(Student);
-			return new ResponseEntity<>(new StudentDTO(Student), HttpStatus.OK);
+			User user = userDAO.saveUser(converter.toStudent(Student));
+			return new ResponseEntity<>(new StudentDTO(user), HttpStatus.OK);
 		} catch (Exception ex) {
 			LOG.error("addStudent()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

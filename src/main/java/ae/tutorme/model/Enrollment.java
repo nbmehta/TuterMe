@@ -36,8 +36,17 @@ public class Enrollment {
         this.student = null;
         this.enrolledDate = null;
     }
+    
+    public Enrollment(int id, Student student, Course course, Date enrolledDate, double amountPaid) {
+		super();
+		this.id = id;
+		this.student = student;
+		this.course = course;
+		this.enrolledDate = enrolledDate;
+		this.amountPaid = amountPaid;
+	}
 
-    public Enrollment(Date enrolledDate) {
+	public Enrollment(Date enrolledDate) {
         this();
         this.enrolledDate = enrolledDate;
     }

@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,8 +55,20 @@ public abstract class User implements Serializable
         this.userName = userName;
         this.password = password;
     }
+    
+    public User(int userId, String userName, String password, boolean enabled, String name, Activation activation, Authorization authorization, Set<Message> messages) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.enabled = enabled;
+		this.name = name;
+		this.activation = activation;
+		this.authorization = authorization;
+		this.messages = messages;
+	}
 
-    public User(String userName, String password, boolean enabled, Activation activation) {
+	public User(String userName, String password, boolean enabled, Activation activation) {
         this(userName, password);
         this.enabled = enabled;
         this.activation = activation;

@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,8 +19,14 @@ public class Student extends User
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "student")
     private Set<Rate> rates = new HashSet<>(0);
+    
+    public Student(int userId, String userName, String password, boolean enabled, String name, Activation activation, Authorization authorization, Set<Message> messages, Set<Enrollment> enrollments, Set<Rate> rates) {
+		super(userId, userName, password, enabled, name, activation, authorization, messages);
+		this.enrollments = enrollments;
+		this.rates = rates;
+	}
 
-    public Student() {
+	public Student() {
         super();
     }
 

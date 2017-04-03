@@ -24,10 +24,11 @@ public class EnrollmentDAOImp implements EnrollmentDAO {
     @Autowired
     SessionFactory sessionFactory;
 
-    public void saveEnrollment(Enrollment enrollment) {
+    public Enrollment saveEnrollment(Enrollment enrollment) {
         Session session = sessionFactory.openSession();
         session.save(enrollment);
         session.flush();
+        return enrollment;
     }
 
     @Override

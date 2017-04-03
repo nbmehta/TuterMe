@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.TopicDAO;
 import ae.tutorme.dto.TopicDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Topic;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/topic")
 public class TopicResource {
 	private static final Logger logger = Logger.getLogger(TopicResource.class);
@@ -26,11 +28,14 @@ public class TopicResource {
 	@Autowired
 	private TopicDAO topicDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addTopic(@RequestBody Topic topic) {
+	public ResponseEntity<?> addTopic(@RequestBody TopicDTO topic) {
 		try {
-			topicDAO.saveTopic(topic);
-			return new ResponseEntity<TopicDTO>(new TopicDTO(topic), HttpStatus.OK);
+			Topic t = topicDAO.saveTopic(converter.toTopic(topic));
+			return new ResponseEntity<>(new TopicDTO(t), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("addTopic()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -7,18 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.EnrollmentDAO;
 import ae.tutorme.dto.EnrollmentDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Enrollment;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/enrollment")
 public class EnrollmentResource {
 private static final Logger logger = Logger.getLogger(EnrollmentResource.class);
@@ -26,11 +27,14 @@ private static final Logger logger = Logger.getLogger(EnrollmentResource.class);
 	@Autowired
 	private EnrollmentDAO enrollmentDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addEnrollment(@RequestBody Enrollment Enrollment) {
+	public ResponseEntity<?> addEnrollment(@RequestBody EnrollmentDTO Enrollment) {
 		try {
-			enrollmentDAO.saveEnrollment(Enrollment);
-			return new ResponseEntity<EnrollmentDTO>(new EnrollmentDTO(Enrollment), HttpStatus.OK);
+			Enrollment enroll = enrollmentDAO.saveEnrollment(converter.toEnrollment(Enrollment));
+			return new ResponseEntity<>(new EnrollmentDTO(enroll), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("addEnrollment()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

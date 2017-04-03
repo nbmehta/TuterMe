@@ -24,8 +24,16 @@ public class Rate {
 
     @Column(name = "RATING")
     private double rating;
+    
+    public Rate(int id, Student student, Course course, double rating) {
+		super();
+		this.id = id;
+		this.student = student;
+		this.course = course;
+		this.rating = rating;
+	}
 
-    public Rate() {
+	public Rate() {
         this.course =null;
         this.student = null;
         this.rating = 0;

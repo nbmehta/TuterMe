@@ -11,7 +11,7 @@ import ae.tutorme.model.User;
  */
 public interface UserDAO {
 
-	void saveUser(User user);
+	User saveUser(User user);
 
 	User getUserById(int id);
 

@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.AuthorizationDAO;
 import ae.tutorme.dto.AuthorizationDTO;
 import ae.tutorme.model.Authorization;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping(value="/autorization")
 public class AuthorizationResource {
 	
@@ -28,10 +29,10 @@ public class AuthorizationResource {
 	private AuthorizationDAO authorizationDAO;
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addAuthorization(@RequestBody Authorization auth) {
+	public ResponseEntity<?> addAuthorization(@RequestBody AuthorizationDTO auth) {
 		try {
-			authorizationDAO.saveAuthorization(auth);
-			return new ResponseEntity<AuthorizationDTO>(new AuthorizationDTO(auth), HttpStatus.OK);
+			Authorization full = authorizationDAO.saveAuthorization(auth);
+			return new ResponseEntity<AuthorizationDTO>(new AuthorizationDTO(full), HttpStatus.OK);
 		} catch (Exception ex) {
 			LOG.error("addAuthorization()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

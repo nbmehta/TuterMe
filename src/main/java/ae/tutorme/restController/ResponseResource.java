@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.ResponseDAO;
 import ae.tutorme.dto.ResponseDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Response;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/response")
 public class ResponseResource {
 	private static final Logger logger = Logger.getLogger(ResponseResource.class);
@@ -26,11 +28,14 @@ public class ResponseResource {
 	@Autowired
 	private ResponseDAO responseDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addResponse(@RequestBody Response response) {
+	public ResponseEntity<?> addResponse(@RequestBody ResponseDTO response) {
 		try {
-			responseDAO.saveResponse(response);
-			return new ResponseEntity<ResponseDTO>(new ResponseDTO(response), HttpStatus.OK);
+			Response res = responseDAO.saveResponse(converter.toResponse(response));
+			return new ResponseEntity<ResponseDTO>(new ResponseDTO(res), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("addResponse()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

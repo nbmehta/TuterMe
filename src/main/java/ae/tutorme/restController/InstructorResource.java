@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.UserDAO;
 import ae.tutorme.dto.InstructorDTO;
 import ae.tutorme.dto.InstructorDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Instructor;
 import ae.tutorme.model.Instructor;
+import ae.tutorme.model.User;
 import ae.tutorme.utils.Helpers;
 
-@Controller
+@RestController
 @RequestMapping("/instructor")
 public class InstructorResource {
 	private static final Logger LOG = Logger.getLogger(InstructorResource.class);
@@ -25,13 +28,14 @@ public class InstructorResource {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public ResponseEntity<?> addInstructor(@RequestBody Instructor instructor) {
+	public ResponseEntity<?> addInstructor(@RequestBody InstructorDTO instructor) {
 		try {
-			instructor.getActivation().setUser(instructor);
-			instructor.getAuthorization().setUser(instructor);
-			userDAO.saveUser(instructor);
-			return new ResponseEntity<>(new InstructorDTO(instructor), HttpStatus.OK);
+			User user = userDAO.saveUser(converter.toInstructor(instructor));
+			return new ResponseEntity<>(new InstructorDTO(user), HttpStatus.OK);
 		} catch (Exception ex) {
 			LOG.error("addInstructor()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

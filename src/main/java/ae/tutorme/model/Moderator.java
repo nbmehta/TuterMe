@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,9 +16,13 @@ public class Moderator extends User
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy = "moderator")
     private Set<Course> courses = new HashSet<>(0);
+    
+    public Moderator(int userId, String userName, String password, boolean enabled, String name, Activation activation, Authorization authorization, Set<Message> messages, Set<Course> courses) {
+		super(userId, userName, password, enabled, name, activation, authorization, messages);
+		this.courses = courses;
+	}
 
-
-    public Moderator() {
+	public Moderator() {
     }
 
     public Moderator(String userName, String password) {

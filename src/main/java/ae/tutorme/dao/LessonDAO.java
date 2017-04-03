@@ -8,7 +8,7 @@ import ae.tutorme.model.Lesson;
  */
 public interface LessonDAO  {
 
-    void saveLesson(Lesson lesson);
+    Lesson saveLesson(Lesson lesson);
 
     void updateLesson(Lesson lesson);
     

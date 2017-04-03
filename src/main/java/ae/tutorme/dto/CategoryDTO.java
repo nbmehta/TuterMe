@@ -19,8 +19,11 @@ public class CategoryDTO implements Serializable {
 
     private int categoryId;
     private String name;
-    private Set<CourseDTO> courses ;
+    private Set<CourseDTO> courses = new HashSet<>();
 
+    public CategoryDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public CategoryDTO(Category category) {
@@ -30,7 +33,7 @@ public class CategoryDTO implements Serializable {
     }
 
     public Set<CourseDTO> converter(Set<Course> courses) {
-        Set<CourseDTO> coursesDTO = null;
+        Set<CourseDTO> coursesDTO = new HashSet<>();
         for (Course c : courses) {
             CourseDTO courseDTO = new CourseDTO(c);
             coursesDTO.add(courseDTO);

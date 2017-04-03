@@ -23,10 +23,11 @@ public class LessonDAOImp implements LessonDAO {
 
 
     @Override
-    public void saveLesson(Lesson lesson) {
+    public Lesson saveLesson(Lesson lesson) {
         Session session = sessionFactory.getCurrentSession();
         session.save(lesson);
         session.flush();
+        return lesson;
     }
 
     @Override

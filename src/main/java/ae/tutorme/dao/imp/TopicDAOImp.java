@@ -24,12 +24,12 @@ public class TopicDAOImp implements TopicDAO {
 
 
     @Override
-    public void saveTopic(Topic topic) {
+    public Topic saveTopic(Topic topic) {
 
         Session session = sessionFactory.getCurrentSession();
         session.save(topic);
         session.flush();
-
+        return topic;
     }
 
     @Override

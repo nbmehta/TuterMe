@@ -30,10 +30,11 @@ public class CourseDAOImp implements CourseDAO {
 
 
     @Override
-    public void saveCourse(Course course) {
+    public Course saveCourse(Course course) {
         Session session = sessionFactory.openSession();
         session.save(course);
         session.flush();
+        return course;
     }
 
     @Override
@@ -77,7 +78,8 @@ public class CourseDAOImp implements CourseDAO {
 
 	@Override
 	public CourseDTO updateCourse(int id, CourseDTO course) {
-		Course courseFull = getCourseById(id);
+		Session session = sessionFactory.getCurrentSession();
+        Course courseFull = (Course) session.get(Course.class, id);
 		
 		if(courseFull != null) {
 			courseFull.setDescription(course.getDescription());
@@ -85,7 +87,7 @@ public class CourseDAOImp implements CourseDAO {
 			courseFull.setPrice(course.getPrice());
 			courseFull.setName(course.getName());
 			
-			updateCourse(courseFull);
+			session.saveOrUpdate(courseFull);
 			return new CourseDTO(courseFull);
 		} else {
 			return null;

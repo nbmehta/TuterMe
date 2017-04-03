@@ -27,6 +27,7 @@ public abstract class UserDTO implements Serializable
     private AuthorizationDTO authorization;
     private Set<Message> messages = new HashSet<>(0);
 
+    public UserDTO() {}
 
     public UserDTO(User user) {
         this.userId = user.getUserId();

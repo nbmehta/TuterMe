@@ -31,9 +31,14 @@ public class Authorization
         this.role = role;
     }
 
+    public Authorization(int id, User user, String role) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.role = role;
+	}
 
-
-    public Authorization() {
+	public Authorization() {
         this(null, "");
     }
 

@@ -2,6 +2,7 @@ package ae.tutorme.model;
 
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CATEGORY")
-public class   Category {
+public class Category {
 
     @Id
     @GeneratedValue
@@ -24,8 +25,15 @@ public class   Category {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "category")
     private Set<Course> courses = new HashSet<>(0);
+    
+    public Category(int categoryId, String name, Set<Course> courses) {
+		super();
+		this.categoryId = categoryId;
+		this.name = name;
+		this.courses = courses;
+	}
 
-    public Category() {
+	public Category() {
         this("");
     }
 

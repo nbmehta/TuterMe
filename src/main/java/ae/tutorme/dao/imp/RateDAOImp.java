@@ -25,12 +25,13 @@ public class RateDAOImp implements RateDAO {
 
 
     @Override
-    public void saveRate(Rate rate) {
+    public Rate saveRate(Rate rate) {
 
         Session session = sessionFactory.getCurrentSession();
         session.save(rate);
         session.flush();
 
+        return rate;
     }
 
 

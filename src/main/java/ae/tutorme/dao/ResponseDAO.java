@@ -8,7 +8,7 @@ import ae.tutorme.model.Response;
  */
 public interface ResponseDAO  {
 
-    void saveResponse(Response response);
+    Response saveResponse(Response response);
 
     void updateResponse(Response response);
 

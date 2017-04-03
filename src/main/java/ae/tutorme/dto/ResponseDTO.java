@@ -17,9 +17,13 @@ public class ResponseDTO implements Serializable {
     private int id;
     private int courseId;
     private int userId;
-    private Set<ResponseDTO> responses ;
+    private Set<ResponseDTO> responses = new HashSet<>();
     private int responseId;
     private String text;
+    
+    public ResponseDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public ResponseDTO(Response response) {

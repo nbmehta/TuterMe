@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import ae.tutorme.dao.UserDAO;
 import ae.tutorme.dto.AdminDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Admin;
+import ae.tutorme.model.User;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class AdminResource {
 	
@@ -23,16 +26,17 @@ public class AdminResource {
 	@Autowired
 	private UserDAO userDAO;
 	
+	@Autowired
+	private Converter converter;
+	
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public ResponseEntity<?> addAdmin(@RequestBody Admin admin) {
+	public ResponseEntity<?> addAdmin(@RequestBody AdminDTO admin) {
 		try {
-			admin.getActivation().setUser(admin);
-			admin.getAuthorization().setUser(admin);
-			userDAO.saveUser(admin);
-			return new ResponseEntity<AdminDTO>(new AdminDTO(admin), HttpStatus.OK);
+			User user = userDAO.saveUser(converter.toAdmin(admin));
+			return new ResponseEntity<>(new AdminDTO(user), HttpStatus.OK);
 		} catch (Exception ex) {
 			LOG.error("addAdmin()", ex);
-			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

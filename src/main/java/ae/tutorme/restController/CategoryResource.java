@@ -14,55 +14,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ae.tutorme.dao.LessonDAO;
-import ae.tutorme.dto.LessonDTO;
+import ae.tutorme.dao.CategoryDAO;
+import ae.tutorme.dto.CategoryDTO;
 import ae.tutorme.dto.converter.Converter;
-import ae.tutorme.model.Lesson;
+import ae.tutorme.model.Category;
 import ae.tutorme.utils.Helpers;
 
 @RestController
-@RequestMapping("/lesson")
-public class LessonResource {
-	private static final Logger logger = Logger.getLogger(LessonResource.class);
+@RequestMapping("/category")
+public class CategoryResource {
+	private static final Logger logger = Logger.getLogger(CategoryResource.class);
 	
 	@Autowired
-	private LessonDAO lessonDAO;
+	private CategoryDAO categoryDAO;
 	
 	@Autowired
 	private Converter converter;
 	
 	@RequestMapping(value="/add", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> addLesson(@RequestBody LessonDTO lesson) {
+	public ResponseEntity<?> addCategory(@RequestBody CategoryDTO category) {
 		try {
-			Lesson l = lessonDAO.saveLesson(converter.toLesson(lesson));
-			return new ResponseEntity<>(new LessonDTO(l), HttpStatus.OK);
+			Category cat = categoryDAO.saveCategory(converter.toCategory(category));
+			return new ResponseEntity<>(new CategoryDTO(cat), HttpStatus.OK);
 		} catch (Exception ex) {
-			logger.error("addLesson()", ex);
+			logger.error("addCategory()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@RequestMapping(value="/id/{id}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getLesson(@PathVariable("id") int id) {
+	public ResponseEntity<?> getCategory(@PathVariable("id") int id) {
 		try {
-			LessonDTO lesson = lessonDAO.getLessonDTOById(id);
-			if(lesson != null)
-				return new ResponseEntity<LessonDTO>(lesson, HttpStatus.OK);
+			CategoryDTO category = categoryDAO.getCategoryDTOById(id);
+			if(category != null)
+				return new ResponseEntity<CategoryDTO>(category, HttpStatus.OK);
 			else
 				return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 		} catch (Exception ex) {
-			logger.error("getLesson()", ex);
+			logger.error("getCategory()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@RequestMapping(value="/update/{id}", method=RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> updateLesson(@PathVariable("id") int id, @RequestBody LessonDTO lesson) {
+	public ResponseEntity<?> updateCategory(@PathVariable("id") int id, @RequestBody CategoryDTO category) {
 		try {
-			LessonDTO lessonFull = lessonDAO.updateLesson(id, lesson);
-			return new ResponseEntity<>(lessonFull, lessonFull == null ? null : HttpStatus.OK);
+			CategoryDTO categoryFull = categoryDAO.updateCategory(id, category);
+			return new ResponseEntity<>(categoryFull, categoryFull == null ? null : HttpStatus.OK);
 		} catch (Exception ex) {
-			logger.error("updateLesson()", ex);
+			logger.error("updateCategory()", ex);
 			return new ResponseEntity<>(Helpers.returnSingleMessage(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -70,7 +70,7 @@ public class LessonResource {
 	@RequestMapping(value="/delete", method=RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> deleteActivation(@RequestBody Map<String, Object> map) {
 		try {
-			lessonDAO.deleteLesson((int) map.get("id"));
+			categoryDAO.deleteCategory((int) map.get("id"));
 			return new ResponseEntity<>(Helpers.returnSingleMessage("success"), HttpStatus.OK);
 		} catch (Exception ex) {
 			logger.error("deleteActivation()", ex);

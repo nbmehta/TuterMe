@@ -17,7 +17,7 @@ public class MessageDTO implements Serializable {
 
     private int id;
     private int userId;
-    private Set<MessageDTO> messages ;
+    private Set<MessageDTO> messages  = new HashSet<>();
     private int messageId;
     private int reciverId;
     private String subject;
@@ -33,12 +33,12 @@ public MessageDTO() {
         this.subject = message.getSubject();
         this.reciverId = message.getReciverId();
         this.userId = message.getUser().getUserId();
-        this.messageId = message.getMessage().getId();
+        this.messageId = message.getMessage() == null ? 0 : message.getMessage().getId();
         this.messages = converter(message.getMessages());
     }
 
     public Set<MessageDTO> converter(Set<Message> messages) {
-        Set<MessageDTO> messageDTOs = null;
+        Set<MessageDTO> messageDTOs = new HashSet<>();
         for (Message m : messages) {
             MessageDTO messageDTO = new MessageDTO(m);
             messageDTOs.add(messageDTO);
@@ -46,55 +46,59 @@ public MessageDTO() {
         return messageDTOs;
     }
 
-    public Set<MessageDTO> getMessages() {
-        return messages;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setMessages(Set<MessageDTO> messages) {
-        this.messages = messages;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getMessage() {
-        return messageId;
-    }
+	public int getUserId() {
+		return userId;
+	}
 
-    public void setMessage(int message) {
-        this.messageId = message;
-    }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public Set<MessageDTO> getMessages() {
+		return messages;
+	}
 
-    public int getUser() {
-        return userId;
-    }
+	public void setMessages(Set<MessageDTO> messages) {
+		this.messages = messages;
+	}
 
-    public void setUser(int user) {
-        this.userId = user;
-    }
+	public int getMessageId() {
+		return messageId;
+	}
 
-    public int getReciverId() {
-        return reciverId;
-    }
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
+	}
 
-    public void setReciverId(int reciverId) {
-        this.reciverId = reciverId;
-    }
+	public int getReciverId() {
+		return reciverId;
+	}
 
-    public String getSubject() {
-        return subject;
-    }
+	public void setReciverId(int reciverId) {
+		this.reciverId = reciverId;
+	}
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+	public String getSubject() {
+		return subject;
+	}
 
-    public String getBody() {
-        return body;
-    }
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
 }

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface EnrollmentDAO {
 
-    void saveEnrollment(Enrollment enrollment);
+    Enrollment saveEnrollment(Enrollment enrollment);
 
     Enrollment getEnrollmentById(int id);
     

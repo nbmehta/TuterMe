@@ -18,6 +18,10 @@ public class LessonDTO implements Serializable {
     private String lessonName;
     private int lessonNumber;
     private String materialPath;
+    
+    public LessonDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public LessonDTO(Lesson lesson) {
@@ -25,7 +29,7 @@ public class LessonDTO implements Serializable {
         this.lessonName = lesson.getLessonName();
         this.lessonNumber = lesson.getLessonNumber();
         this.materialPath = lesson.getMaterialPath();
-        this.topicId = lesson.getTopic().getId();
+        this.topicId = lesson.getTopic() == null ? 0 : lesson.getTopic().getId();
     }
 
 

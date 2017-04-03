@@ -1,6 +1,7 @@
 package ae.tutorme.model;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,8 +22,8 @@ public class Message {
     private User user;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "message")
-    private Set<Message> messages = new HashSet<>(0);
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
+    private Set<Message> messages = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
@@ -37,8 +38,19 @@ public class Message {
 
     @Column(name = "BODY")
     private String body;
+    
+    public Message(int id, User user, Set<Message> messages, Message message, int reciverId, String subject, String body) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.messages = messages;
+		this.message = message;
+		this.reciverId = reciverId;
+		this.subject = subject;
+		this.body = body;
+	}
 
-    public Message() {
+	public Message() {
         this.body = "";
         this.subject = "";
         this.reciverId = 0;

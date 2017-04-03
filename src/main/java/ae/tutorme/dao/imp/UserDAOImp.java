@@ -36,7 +36,7 @@ public class UserDAOImp implements UserDAO{
     @Autowired
     private InstructorDAO instructorDAO;
 
-    public void saveUser(User user) {
+    public User saveUser(User user) {
 
         Session session = sessionFactory.getCurrentSession();
 
@@ -44,7 +44,7 @@ public class UserDAOImp implements UserDAO{
 
         session.flush();
 
-
+        return user;
     }
 
     @Override

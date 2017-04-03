@@ -39,14 +39,6 @@ public class UserResource {
     @Autowired
     private UserDAO userDAO;
 
-
-    @RequestMapping(value = "/add",method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public int saveUser(User user)
-    {
-    	userDAO.saveUser(user);
-    	return user.getUserId();
-    };
-
     @RequestMapping(value = "/id/{userId}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getUserById(@PathVariable("userId") int userId)
     {

@@ -1,6 +1,8 @@
 package ae.tutorme.dao.imp;
 
 import ae.tutorme.dao.ActivationDAO;
+import ae.tutorme.dto.ActivationDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Activation;
 
 import org.hibernate.Query;
@@ -16,9 +18,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class ActivationDAOImp implements ActivationDAO {
+	
+	@Autowired
+	private Converter converter;
 
     @Autowired
     private SessionFactory sessionFactory;
+    
+    @Override
+    public Activation saveActivation(ActivationDTO activation) {
+    	Activation activationFull = converter.toActivation(activation);
+        saveActivation(activationFull);
+        return activationFull;
+    }
 
     @Override
     public void saveActivation(Activation activation) {

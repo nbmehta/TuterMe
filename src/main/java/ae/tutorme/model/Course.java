@@ -3,6 +3,7 @@ package ae.tutorme.model;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,6 @@ public class Course {
     @GeneratedValue
     @Column(name = "COURSE_ID")
     private int courseId;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
@@ -52,11 +52,9 @@ public class Course {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "course")
     private Set<Rate> rates = new HashSet<>(0);
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn(name = "CATEGORY_ID")
     private Category category;
-
 
     public Course() {
         this.description = "";
@@ -68,8 +66,24 @@ public class Course {
         this.rating = 0;
         this.enabled = false;
     }
+    
+    public Course(int courseId, Instructor instructor, Moderator moderator, String description, double price, String name, boolean enabled, double rating, Set<Enrollment> enrollments, Set<Topic> topics, Set<Rate> rates, Category category) {
+		super();
+		this.courseId = courseId;
+		this.instructor = instructor;
+		this.moderator = moderator;
+		this.description = description;
+		this.price = price;
+		this.name = name;
+		this.enabled = enabled;
+		this.rating = rating;
+		this.enrollments = enrollments;
+		this.topics = topics;
+		this.rates = rates;
+		this.category = category;
+	}
 
-    public Course(String name) {
+	public Course(String name) {
         this();
         this.name = name;
     }

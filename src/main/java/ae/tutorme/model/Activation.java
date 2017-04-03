@@ -3,6 +3,7 @@ package ae.tutorme.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
 import java.util.Date;
 
 /**
@@ -19,8 +20,6 @@ public class Activation
     @Column(name = "ID")
     private int id;
 
-
-
     @Column(name = "ACTIVATION_CODE")
     private String activationCode;
 
@@ -30,8 +29,16 @@ public class Activation
     @OneToOne(fetch = FetchType.LAZY, mappedBy="activation")
     @JsonIgnore
     private User user;
+    
+    public Activation(int id, String activationCode, Date expiryDate, User user) {
+		super();
+		this.id = id;
+		this.activationCode = activationCode;
+		this.expiryDate = expiryDate;
+		this.user = user;
+	}
 
-    public Activation(String activationCode, Date expiryDate, User user) {
+	public Activation(String activationCode, Date expiryDate, User user) {
         this.activationCode = activationCode;
         this.expiryDate = expiryDate;
         this.user = user;

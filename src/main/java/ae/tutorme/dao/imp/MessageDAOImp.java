@@ -1,6 +1,8 @@
 package ae.tutorme.dao.imp;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ae.tutorme.dao.MessageDAO;
 import ae.tutorme.dto.MessageDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Message;
 
 /**
@@ -23,11 +26,15 @@ public class MessageDAOImp implements MessageDAO {
     @Autowired
     SessionFactory sessionFactory;
     
+    @Autowired
+    private Converter converter;
+    
     @Override
-    public void saveMessage(Message message) {
+    public Message saveMessage(Message message) {
         Session session = sessionFactory.getCurrentSession();
         session.save(message);
         session.flush();
+        return message;
     }
 
     @Override
@@ -64,11 +71,16 @@ public class MessageDAOImp implements MessageDAO {
 	@Override
 	public MessageDTO updateMessage(int id, MessageDTO msg) {
 		Message msgFull = getMessagesById(msg.getId());
+		Set<Message> msgs = new HashSet<>();
+		for(MessageDTO d : msg.getMessages()) {
+			msgs.add(d.getId() > 0 ? getMessagesById(d.getId()) : converter.toMessage(d));
+		}
 		
 		if(msgFull != null) {
 			msgFull.setBody(msg.getBody());
 			msgFull.setReciverId(msg.getReciverId());
 			msgFull.setSubject(msg.getSubject());
+			msgFull.setMessages(msgs);
 			
 			updateMessage(msgFull);
 			return new MessageDTO(msgFull);

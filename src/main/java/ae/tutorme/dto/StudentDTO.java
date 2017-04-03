@@ -23,6 +23,10 @@ public class StudentDTO extends UserDTO
     public StudentDTO(User user) {
         super(user);
     }
+    
+    public StudentDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 
     public Set<Enrollment> getEnrollments() {

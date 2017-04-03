@@ -23,8 +23,11 @@ import java.util.Set;
 public class InstructorDTO extends UserDTO
 {
 
-    private Set<CourseDTO> courses ;
+    private Set<CourseDTO> courses = new HashSet<>();
 
+    public InstructorDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public InstructorDTO(User user) {
         super(user);

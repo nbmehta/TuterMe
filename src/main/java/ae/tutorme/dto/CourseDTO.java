@@ -26,9 +26,9 @@ public class CourseDTO implements Serializable {
     private String name;
     private boolean enabled;
     private double rating;
-    private Set<EnrollmentDTO> enrollments ;
-    private Set<TopicDTO> topics;
-    private Set<RateDTO> rates ;
+    private Set<EnrollmentDTO> enrollments = new HashSet<>();
+    private Set<TopicDTO> topics = new HashSet<>();
+    private Set<RateDTO> rates = new HashSet<>();
     private int categoryId;
     
     public CourseDTO() {

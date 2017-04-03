@@ -16,6 +16,10 @@ public class RateDTO implements Serializable {
     private int studentId;
     private int courseId;
     private double rating;
+    
+    public RateDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public RateDTO(Rate rate) {
         this.id = rate.getId();
