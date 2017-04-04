@@ -40,7 +40,7 @@ public class Course {
     @Column(name = "ENABLED")
     private boolean enabled;
 
-    @Formula("(select IFNULL(sum(rate.RATING) + 20 /10, 0) from RATE rate where rate.course_COURSE_ID = COURSE_ID)")
+    @Formula("(select IFNULL(sum(rate.RATING) / count(*), 0) from RATE rate where rate.course_COURSE_ID = COURSE_ID)")
     private double rating;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "course")

@@ -39,9 +39,9 @@ public class CourseDTO implements Serializable {
     public CourseDTO(Course course) {
         this.courseId = course.getCourseId();
         this.description = course.getDescription();
-        this.categoryId = course.getCategory().getCategoryId();
-        this.instructorId = course.getInstructor().getUserId();
-        this.moderatorId = course.getModerator().getUserId();
+        this.categoryId = course.getCategory() != null ? course.getCategory().getCategoryId() : 0;
+        this.instructorId = course.getInstructor() != null ? course.getInstructor().getUserId() : 0;
+        this.moderatorId = course.getModerator() != null ? course.getModerator().getUserId() : 0;
         this.name = course.getName();
         this.price = course.getPrice();
         this.rating = course.getRating();

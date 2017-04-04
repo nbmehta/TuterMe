@@ -26,10 +26,10 @@ public class ModeratorDTO extends UserDTO
     public ModeratorDTO(User user) {
         super(user);
         Moderator m = (Moderator) user;
-        this.courses = converter(m.getCourses());
+        this.courses = courseConverter(m.getCourses());
     }
 
-    public Set<CourseDTO> converter(Set<Course> courses) {
+    public Set<CourseDTO> courseConverter(Set<Course> courses) {
         Set<CourseDTO> coursesDTO = null;
         for (Course c : courses) {
             CourseDTO courseDTO = new CourseDTO(c);

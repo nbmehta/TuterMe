@@ -25,7 +25,7 @@ public class ActivationDTO implements Serializable
         this.id = activation.getId();
         this.activationCode = activation.getactivationCode();
         this.expiryDate = activation.getExpiryDate();
-        this.userName = activation.getUser().getUserName();
+        this.userName = activation.getUser() != null ? activation.getUser().getUserName() : null;
     }
 
 	public int getId() {

@@ -104,7 +104,7 @@ public class Converter {
 			auth = toAuthorization(admin.getAuthorization());
 		}
 		
-		Admin ret = new Admin(admin.getUserId(), admin.getUserName(), admin.getPassword(), admin.isEnabled(), admin.getName(), activation, auth, admin.getMessages());
+		Admin ret = new Admin(admin.getUserId(), admin.getUserName(), admin.getPassword(), admin.isEnabled(), admin.getName(), activation, auth, toMessages(admin.getMessages()));
 		if(ret.getActivation().getUser() == null)
 			ret.getActivation().setUser(ret);
 		if(ret.getAuthorization().getUser() == null)
@@ -123,7 +123,7 @@ public class Converter {
 		if(auth == null) {
 			auth = toAuthorization(studentDTO.getAuthorization());
 		}
-		Student ret =new Student(studentDTO.getUserId(), studentDTO.getUserName(), studentDTO.getPassword(), studentDTO.isEnabled(), studentDTO.getName(), activation, auth, studentDTO.getMessages(), studentDTO.getEnrollments(), studentDTO.getRates()); 
+		Student ret =new Student(studentDTO.getUserId(), studentDTO.getUserName(), studentDTO.getPassword(), studentDTO.isEnabled(), studentDTO.getName(), activation, auth, toMessages(studentDTO.getMessages()), studentDTO.getEnrollments(), studentDTO.getRates()); 
 		
 		if(ret.getActivation().getUser() == null)
 			ret.getActivation().setUser(ret);
@@ -149,7 +149,7 @@ public class Converter {
 			courses.add(toCouse(c));
 		}
 		
-		Instructor ret = new Instructor(instructorDTO.getUserId(), instructorDTO.getUserName(), instructorDTO.getPassword(), instructorDTO.isEnabled(), instructorDTO.getName(), activation, auth, instructorDTO.getMessages(), courses);
+		Instructor ret = new Instructor(instructorDTO.getUserId(), instructorDTO.getUserName(), instructorDTO.getPassword(), instructorDTO.isEnabled(), instructorDTO.getName(), activation, auth, toMessages(instructorDTO.getMessages()), courses);
 		
 		if(ret.getActivation().getUser() == null)
 			ret.getActivation().setUser(ret);
@@ -175,7 +175,7 @@ public class Converter {
 			courses.add(toCouse(c));
 		}
 		
-		Moderator ret = new Moderator(moderatorDTO.getUserId(), moderatorDTO.getUserName(), moderatorDTO.getPassword(), moderatorDTO.isEnabled(), moderatorDTO.getName(), activation, auth, moderatorDTO.getMessages(), courses);
+		Moderator ret = new Moderator(moderatorDTO.getUserId(), moderatorDTO.getUserName(), moderatorDTO.getPassword(), moderatorDTO.isEnabled(), moderatorDTO.getName(), activation, auth, toMessages(moderatorDTO.getMessages()), courses);
 		
 		if(ret.getActivation().getUser() == null)
 			ret.getActivation().setUser(ret);
@@ -257,6 +257,14 @@ public class Converter {
 		}
 		return new Category(cat.getCategoryId(), cat.getName(), courses);
 	}
+	
+	public Set<Message> toMessages(Set<MessageDTO> messageDTOs) {
+        Set<Message> messages = new HashSet<>();
+        for (MessageDTO m : messageDTOs) {
+        	messages.add(toMessage(m));
+        }
+        return messages;
+    }
 	
 	public Message toMessage(MessageDTO dto) {
 		User user = userDAO.getUserById(dto.getUserId());

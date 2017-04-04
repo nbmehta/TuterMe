@@ -23,7 +23,7 @@ public class AuthorizationDTO implements Serializable
 
     public AuthorizationDTO(Authorization authorization) {
         this.id = authorization.getId();
-        this.userName = authorization.getUser().getUserName();
+        this.userName = authorization.getUser() != null ? authorization.getUser().getUserName() : null;
         this.role = authorization.getRole();
     }
 

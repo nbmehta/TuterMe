@@ -31,11 +31,11 @@ public class InstructorDTO extends UserDTO
 
     public InstructorDTO(User user) {
         super(user);
-        this.courses = converter(((Instructor) user).getCourses());
+        this.courses = courseConverter(((Instructor) user).getCourses());
     }
 
-    public Set<CourseDTO> converter(Set<Course> courses) {
-        Set<CourseDTO> coursesDTO = null;
+    public Set<CourseDTO> courseConverter(Set<Course> courses) {
+        Set<CourseDTO> coursesDTO = new HashSet<>();
         for (Course c : courses) {
             CourseDTO courseDTO = new CourseDTO(c);
             coursesDTO.add(courseDTO);

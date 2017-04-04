@@ -23,16 +23,16 @@ public class MessageDTO implements Serializable {
     private String subject;
     private String body;
 
-public MessageDTO() {
-	// TODO Auto-generated constructor stub
-}
+	public MessageDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
     public MessageDTO(Message message) {
         this.id = message.getId();
         this.body = message.getBody();
         this.subject = message.getSubject();
         this.reciverId = message.getReciverId();
-        this.userId = message.getUser().getUserId();
+        this.userId = message.getUser() != null ? message.getUser().getUserId() : 0;
         this.messageId = message.getMessage() == null ? 0 : message.getMessage().getId();
         this.messages = converter(message.getMessages());
     }

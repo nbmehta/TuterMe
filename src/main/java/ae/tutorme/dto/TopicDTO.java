@@ -28,7 +28,7 @@ public class TopicDTO implements Serializable {
 
     public TopicDTO(Topic topic) {
         this.id = topic.getId();
-        this.courseId = topic.getCourse().getCourseId();
+        this.courseId = topic.getCourse() != null ? topic.getCourse().getCourseId() : 0;
         this.topicName = topic.getTopicName();
         this.topicNumber = topic.getTopicNumber();
         this.lessons = converter(topic.getLessons());

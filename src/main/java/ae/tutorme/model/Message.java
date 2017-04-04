@@ -21,7 +21,6 @@ public class Message {
     @PrimaryKeyJoinColumn
     private User user;
 
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "message")
     private Set<Message> messages = new HashSet<>();
 

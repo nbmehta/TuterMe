@@ -15,6 +15,7 @@ import ae.tutorme.dto.AdminDTO;
 import ae.tutorme.dto.InstructorDTO;
 import ae.tutorme.dto.ModeratorDTO;
 import ae.tutorme.dto.StudentDTO;
+import ae.tutorme.dto.converter.Converter;
 import ae.tutorme.model.Admin;
 import ae.tutorme.model.Instructor;
 import ae.tutorme.model.Moderator;
@@ -34,7 +35,7 @@ public class UserDAOImp implements UserDAO{
     private SessionFactory sessionFactory;
 
     @Autowired
-    private InstructorDAO instructorDAO;
+    private Converter converter;
 
     public User saveUser(User user) {
 
@@ -99,7 +100,7 @@ public class UserDAOImp implements UserDAO{
 		Admin adminFull = (Admin) session.get(Admin.class, id);
 		
 		adminFull.setEnabled(admin.isEnabled());
-		adminFull.setMessages(admin.getMessages());
+		adminFull.setMessages(converter.toMessages(admin.getMessages()));
 		adminFull.setName(admin.getName());
 		adminFull.setPassword(admin.getPassword());
 		adminFull.setUserName(admin.getUserName());
@@ -115,7 +116,7 @@ public class UserDAOImp implements UserDAO{
 		Instructor instructorFull = (Instructor) session.get(Instructor.class, instructor.getUserId());
 		
 		instructorFull.setEnabled(instructor.isEnabled());
-		instructorFull.setMessages(instructor.getMessages());
+		instructorFull.setMessages(converter.toMessages(instructor.getMessages()));
 		instructorFull.setName(instructor.getName());
 		instructorFull.setPassword(instructor.getPassword());
 		instructorFull.setUserName(instructor.getUserName());
@@ -131,7 +132,7 @@ public class UserDAOImp implements UserDAO{
 		Moderator moderatorFull = (Moderator) session.get(Moderator.class, moderator.getUserId());
 		
 		moderatorFull.setEnabled(moderator.isEnabled());
-		moderatorFull.setMessages(moderator.getMessages());
+		moderatorFull.setMessages(converter.toMessages(moderator.getMessages()));
 		moderatorFull.setName(moderator.getName());
 		moderatorFull.setPassword(moderator.getPassword());
 		moderatorFull.setUserName(moderator.getUserName());
@@ -147,7 +148,7 @@ public class UserDAOImp implements UserDAO{
 		Student studentFull = (Student) session.get(Student.class, id);
 		
 		studentFull.setEnabled(student.isEnabled());
-		studentFull.setMessages(student.getMessages());
+		studentFull.setMessages(converter.toMessages(student.getMessages()));
 		studentFull.setName(student.getName());
 		studentFull.setPassword(student.getPassword());
 		studentFull.setUserName(student.getUserName());

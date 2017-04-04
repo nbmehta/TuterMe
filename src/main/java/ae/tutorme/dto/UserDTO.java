@@ -25,7 +25,7 @@ public abstract class UserDTO implements Serializable
     private String name;
     private ActivationDTO activation;
     private AuthorizationDTO authorization;
-    private Set<Message> messages = new HashSet<>(0);
+    private Set<MessageDTO> messages = new HashSet<>(0);
 
     public UserDTO() {}
 
@@ -37,15 +37,23 @@ public abstract class UserDTO implements Serializable
         this.name = user.getName();
         this.activation = new ActivationDTO(user.getActivation());
         this.authorization = new AuthorizationDTO(user.getAuthorization());
+        this.messages = converter(user.getMessages());
     }
 
+    public Set<MessageDTO> converter(Set<Message> messages) {
+        Set<MessageDTO> messageDTOs = new HashSet<>();
+        for (Message m : messages) {
+            MessageDTO messageDTO = new MessageDTO(m);
+            messageDTOs.add(messageDTO);
+        }
+        return messageDTOs;
+    }
 
-
-    public Set<Message> getMessages() {
+    public Set<MessageDTO> getMessages() {
         return messages;
     }
 
-    public void setMessages(Set<Message> messages) {
+    public void setMessages(Set<MessageDTO> messages) {
         this.messages = messages;
     }
 

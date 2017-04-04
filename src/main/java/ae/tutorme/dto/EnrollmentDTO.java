@@ -27,8 +27,8 @@ public class EnrollmentDTO implements Serializable {
     public EnrollmentDTO(Enrollment enrollment) {
         this.id = enrollment.getId();
         this.amountPaid = enrollment.getAmountPaid();
-        this.courseId = enrollment.getCourse().getCourseId();
-        this.studentId = enrollment.getStudent().getUserId();
+        this.courseId = enrollment.getCourse() != null ? enrollment.getCourse().getCourseId() : 0;
+        this.studentId = enrollment.getStudent() != null ? enrollment.getStudent().getUserId() : 0;
         this.enrolledDate = enrollment.getEnrolledDate();
     }
 

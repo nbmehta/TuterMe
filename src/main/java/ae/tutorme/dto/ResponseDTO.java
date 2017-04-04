@@ -28,10 +28,10 @@ public class ResponseDTO implements Serializable {
 
     public ResponseDTO(Response response) {
         this.id = response.getId();
-        this.courseId = response.getCourse().getCourseId();
-        this.responseId = response.getResponse().getId();
+        this.courseId = response.getCourse() != null ? response.getCourse().getCourseId() : 0;
+        this.responseId = response.getResponse() != null ? response.getResponse().getId() : 0;
         this.text = response.getText();
-        this.userId = response.getUser().getUserId();
+        this.userId = response.getUser() != null ? response.getUser().getUserId() : 0;
         this.responses = converter(response.getResponses());
     }
 
